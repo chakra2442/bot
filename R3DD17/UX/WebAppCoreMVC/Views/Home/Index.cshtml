@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<ejs-grid id="Grid" dataSource="@ViewBag.DataSource" allowPaging="true" allowSorting="true" allowTextWrap="true" gridLines="Both" rowDataBound="rowBound" >
+<e-grid-textwrapsettings wrapMode="Content"></e-grid-textwrapsettings>
+<e-grid-pagesettings pageSize="15"></e-grid-pagesettings>
+ <e-grid-columns>
+    <e-grid-column field="RowKey" headerText="Symbol" width="120"></e-grid-column>
+    <e-grid-column field="Name" headerText="Name"  width="200"></e-grid-column> 
+    <e-grid-column field="Score" headerText="Sentiment" width="120"></e-grid-column>      
+    <e-grid-column field="Sentiments" headerText="Sentiments" disableHtmlEncode="false"  width="300"></e-grid-column>
+    <e-grid-column field="MarketCap" headerText="MarketCap" width="120" format = "C2"></e-grid-column>
+    <e-grid-column field="LastPrice" headerText="LastPrice" width="120" format = "C2"></e-grid-column>
+    <e-grid-column field="Change" headerText="Change" width="100" format = "P3"></e-grid-column>
+</e-grid-columns>
+</ejs-grid>
+
+<style>
+    .e-grid .e-gridheader {
+        border:2px darkblue
+    }
+    .e-grid .e-headercell {
+        color: darkblue;
+        border: 2px darkblue dashed;
+        background: #CEE3F9
+    }
+
+    .price-inc {
+        background: #CEF9E3;
+    }
+    .price-dec {
+        background: #F9D5CE;
+    }
+</style>
+
+<script>
+function rowBound(args) {
+    if (args.data['Change'] > 0)
+    {
+        args.row.classList.add('price-inc');
+    }
+    else
+    {
+        args.row.classList.add('price-dec')
+    }
+}
+
+</script>
